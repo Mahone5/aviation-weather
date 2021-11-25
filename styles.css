@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e3fafc;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+h1 {
+  margin: 2rem 0;
+  text-align: center;
+  color: #0b7285;
+  font-size: 3rem;
+}
+
+.metar-form {
+  width: 30rem;
+  margin: 3rem auto;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  font-size: 0.75rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+input,
+select {
+  width: 100%;
+  display: block;
+  color: #333;
+  padding: 0.25rem;
+  font: inherit;
+  border: 1px solid #888;
+  margin-bottom: 1rem;
+}
+
+/* #taf:link,
+#taf:visited,
+#taf:active {
+  background-color: #0b7285;
+} */
+
+select {
+  background-color: #e3fafc;
+}
+
+button {
+  font: inherit;
+  background-color: #0b7285;
+  color: #fff;
+  border: 1px solid #0b7285;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+button:hover {
+  background-color: #1893a9;
+  border-color: #1893a9;
+}
+
+.form-control-inline {
+  display: flex;
+}
+
+.form-control-inline input {
+  width: auto;
+  margin-right: 0.5rem;
+}
