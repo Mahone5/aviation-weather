@@ -8,50 +8,113 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main>
+    <header>
       <h1>Aviation Weather</h1>
-      <form
-        action="https://aviationweather.gov/metar/data/"
-        method="GET"
-        target="blank"
-        name="textForm"
-        class="metar-form"
-      >
-        <label for="icao-station-identifier"
-          >Enter one or more 4-letter ICAO identifier(s) comma separated</label
+    </header>
+    <main grid-container>
+      <article class="card card-1">
+        <form
+          action="https://aviationweather.gov/metar/data/"
+          method="GET"
+          target="blank"
+          name="textForm"
+          class="metar-form"
         >
-        <input type="text" id="icao-station-identifier" name="ids" />
-        <label for="hours">Select Range of Hours</label>
-        <select name="hours" id="hours" class="hours">
-          <option value="0">Most recent only</option>
-          <option value="1">1 hour</option>
-          <option value="2">2 hours</option>
-          <option value="3" selected>3 hours</option>
-          <option value="4">4 hours</option>
-          <option value="5">5 hours</option>
-          <option value="6">6 hours</option>
-          <option value="12">12 hours</option>
-          <option value="18">18 hours</option>
-          <option value="24">24 hours</option>
-          <option value="36">36 hours</option>
-        </select>
-        <div class="form-control-inline">
-          <input type="checkbox" id="taf" name="taf" checked value="on" />
-          <label for="taf">Include TAF</label>
-          <input
-            type="checkbox"
-            name="layout"
-            value="off"
-            checked=""
-            style="display: none"
-            class="checkbox"
-          />
+          <label for="icao-station-identifier"
+            >Enter one or more 4-letter ICAO identifier(s) comma
+            separated</label
+          >
+          <input type="text" id="icao-station-identifier" name="ids" />
+          <label for="hours">Select Range of Hours</label>
+          <select name="hours" id="hours" class="hours">
+            <option value="0">Most recent only</option>
+            <option value="1">1 hour</option>
+            <option value="2">2 hours</option>
+            <option value="3" selected>3 hours</option>
+            <option value="4">4 hours</option>
+            <option value="5">5 hours</option>
+            <option value="6">6 hours</option>
+            <option value="12">12 hours</option>
+            <option value="18">18 hours</option>
+            <option value="24">24 hours</option>
+            <option value="36">36 hours</option>
+          </select>
+          <div class="form-control-inline">
+            <input type="checkbox" id="taf" name="taf" checked value="on" />
+            <label for="taf">Include TAF</label>
+            <input
+              type="checkbox"
+              name="layout"
+              value="off"
+              checked=""
+              style="display: none"
+              class="checkbox"
+            />
+          </div>
+          <div class="buttons">
+            <button>Submit</button>
+            <button type="reset">Reset</button>
+          </div>
+        </form>
+      </article>
+      <article class="card card-2">Card Two</article>
+      <article class="card card-3">
+        <!-- © wdisseny -->
+        <div
+          id="contain_moon"
+          style="
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            font-size: 23px;
+          "
+        >
+          <div style="font-weight: bold">The moon today</div>
+          <div
+            style="
+              margin-top: -9px;
+              margin-bottom: 60px;
+              padding: 39px;
+              filter: drop-shadow(0 0 39px hsl(191, 100%, 29%));
+            "
+          ></div>
+          <div>.</div>
+          <div style="font-size: small">.</div>
         </div>
-        <div class="buttons">
-          <button>Submit</button>
-          <button type="reset">Reset</button>
-        </div>
-      </form>
+        <script>
+          (function () {
+            var d = new Date().getDate();
+            var m = document.querySelectorAll("#contain_moon div");
+            var a = new XMLHttpRequest();
+            var url =
+              "https://www.icalendar37.net/lunar/api/?lang=en&month=" +
+              (new Date().getMonth() + 1) +
+              "&year=" +
+              new Date().getFullYear() +
+              "&size=130&lightColor=rgb(252,254,216)&shadeColor=rgb(1,19,33)&LDZ=" +
+              new Date(new Date().getFullYear(), new Date().getMonth(), 1) /
+                1000 +
+              "";
+            m[1].style.height = "130px";
+            a.onreadystatechange = function () {
+              if (a.readyState == 4 && a.status == 200) {
+                var b = JSON.parse(a.responseText);
+                m[1].innerHTML = b.phase[d].svg;
+                if (typeof moon_widget_loaded == "function")
+                  moon_widget_loaded(b);
+                m[2].innerHTML = b.phase[d].npWidget;
+                m[3].innerHTML = "Next full moon<br>" + b.nextFullMoon;
+              }
+            };
+            a.open("GET", url, true);
+            a.send();
+          })();
+        </script>
+      </article>
+
+      <article class="card card-4">Card Four</article>
+      <article class="card card-5">Card Five</article>
+      <article class="card card-6">Card Six</article>
     </main>
   </body>
 </html>
