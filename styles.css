@@ -43,15 +43,13 @@ main {
   padding: 1rem;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
 
-.card-1 {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.card-3 {
+.card-2 {
   background-image: linear-gradient(
     75deg,
     white,
@@ -71,12 +69,20 @@ main {
 }
 a {
   color: black;
-  display: flex;
+  /* display: flex; */
 }
 #contain_moon {
   background-color: black;
   color: #fff;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#contain_moon div:nth-child(4) svg {
+  /* next full moon icon */
+  width: 0;
 }
 
 /* .metar-form {
@@ -129,7 +135,7 @@ button {
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 0 3rem;
+  /* margin: 0 3rem; */
 }
 
 button:hover {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aviation Weather</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <header>
@@ -60,8 +61,8 @@
           </div>
         </form>
       </article>
-      <article class="card card-2">Card Two</article>
-      <article class="card card-3">
+
+      <article class="card card-2">
         <!-- © wdisseny -->
         <div
           id="contain_moon"
@@ -106,7 +107,7 @@
                 if (typeof moon_widget_loaded == "function")
                   moon_widget_loaded(b);
                 m[2].innerHTML = b.phase[d].npWidget;
-                m[3].innerHTML = "Next full moon<br>" + b.nextFullMoon;
+                // m[3].innerHTML = "Next full moon<br>" + b.nextFullMoon;
               }
             };
             a.open("GET", url, true);
@@ -114,7 +115,7 @@
           })();
         </script>
       </article>
-
+      <article class="card card-3">Card Three</article>
       <article class="card card-4">Card Four</article>
       <article class="card card-5">Card Five</article>
       <article class="card card-6">Card Six</article>
