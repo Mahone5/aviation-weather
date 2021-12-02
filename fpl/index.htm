@@ -1,0 +1,467 @@
+<html class="ext-strict">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+    <meta name="referrer" content="never" />
+    <meta name="msapplication-TileColor" content="#E2D69A" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="x-ua-compatible" content="IE=9" />
+    <meta http-equiv="x-ua-compatible" content="IE=EmulateIE9" />
+    <title>FPL機器デコーダー</title>
+    <script language="JavaScript" src="/js/fpl.js"></script>
+  </head>
+
+  <body bgcolor="#f5deb3" class="ext-webkit ext-chrome" id="syno-nsc-ext-gen3">
+    <p>
+      <b><span class="size_4">FPL機器デコーダー</span></b>
+    </p>
+
+    <form name="form1">
+      <table height="24">
+        <tbody>
+          <tr>
+            <th height="20">
+              FLT PLNの機器欄(「-B789/H」等で始まる部分をコピペ)
+            </th>
+
+            <td>
+              <input type="text" name="text" size="50" />
+              <input
+                type="button"
+                name="field"
+                value="解読"
+                onclick="decode()"
+              />
+              <input
+                type="button"
+                name="field1"
+                value="リセット"
+                onclick="window.location.reload(true);"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+    <table
+      border="1"
+      cellspacing="1"
+      style="border-collapse: collapse"
+      bordercolor="#111111"
+      width="1516"
+      id="AutoNumber1"
+      height="239"
+    >
+      <tbody>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>S</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">義務搭載無線機器</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message1"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>A</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">GBAS着陸システム</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message2"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>B</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">LPV (APV with SBAS)</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message3"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>C</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">LORAN C</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message4"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>D</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">DME</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message5"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>E1</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            FMC WPR <font color="#0000FF">ACARS</font>
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message6"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>E2</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            D-FIS <font color="#0000FF">ACARS</font>
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message7"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>E3</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            PDC <font color="#0000FF">ACARS</font>
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message8"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>F</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">ADF</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message9"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>G</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">GNSS</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message10"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「G」を記入した場合、「NAV/」及びそれに続けてGNSS補強の種類を明記
+          </td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>H</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">HF 無線電話</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message11"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>I</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">慣性航法装置</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message12"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J1</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> ATN VDLモード2
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message13"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J2</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A HFDL
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message14"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J3</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A VDLモード4
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message15"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J4</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A VDLモード2
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message16"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J5</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A SATCOM(INMARSAT)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message17"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J6</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A SATCOM(MTSAT)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message18"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>J7</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            <font color="#0000FF">CPDLC</font> FANS 1/A SATCOM(Iridium)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message19"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>K</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">MLS</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message20"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>L</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">ILS</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message21"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「S」があれば記載省略可
+          </td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>M1</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            ATC無線電話 <font color="#0000FF">SATCOM </font>(IMMARSAT)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message22"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>M2</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            ATC無線電話 <font color="#0000FF">SATCOM </font>(MTSAT)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message23"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>M3</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            ATC無線電話 <font color="#0000FF">SATCOM </font>(Iridium)
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message24"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>O</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">VOR</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message25"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「S」があれば記載省略可
+          </td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>P1</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">CPDLC RCP 400</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message250"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">　</td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>P2</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">CPDLC RCP 240</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message251"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">　</td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>P3</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">SATVOICE RCP 400</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message252"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">　</td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>R</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">PBN航行の許可</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message26"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「R」を記入した場合、「PBN/」及びそれに続けて適用可能なPBNの種別を明記
+          </td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>T</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">TACAN</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message27"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>U</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">UHF無線電話</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message28"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>V</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">VHF無線電話</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message29"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「S」があれば記載省略可
+          </td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>W</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">RVSM航行の許可</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message30"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>X</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">MNPS航行の許可</td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message31"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>Y</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            8.33kHzチャンネル間隔能力を有するVHF
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message32"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF"></td>
+        </tr>
+        <tr>
+          <td width="50" height="16" bgcolor="#FFFFD5"><b>Z</b></td>
+          <td width="330" height="16" bgcolor="#FFFFFF">
+            その他搭載機器または能力
+          </td>
+          <td width="42" height="16" bgcolor="#FFFFFF">
+            <div align="center" id="message33"></div>
+          </td>
+          <td width="1252" height="16" bgcolor="#FFFFFF">
+            「Z」を記入した場合、「COM/」「NAV/」「DAT/」及びそれに続けて当該機器の名称又は能力を明記
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <table
+      border="1"
+      cellspacing="1"
+      style="border-collapse: collapse"
+      bordercolor="#111111"
+      width="900"
+      id="AutoNumber2"
+    >
+      <tbody>
+        <tr>
+          <td width="57" height="32" bgcolor="#FFFF00"><b>XPDR</b></td>
+          <td width="593" height="32" bgcolor="#FFFFFF">
+            <div id="message34"></div>
+          </td>
+        </tr>
+        <tr>
+          <td width="57" height="32" bgcolor="#FFFF00"><b>ADS-B</b></td>
+          <td width="593" height="32" bgcolor="#FFFFFF">
+            <div id="message35"></div>
+          </td>
+        </tr>
+        <tr>
+          <td width="57" height="32" bgcolor="#FFFF00"><b>ADS-C</b></td>
+          <td width="593" height="32" bgcolor="#FFFFFF">
+            <div id="message36"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div
+      id="syno-nsc-ext-comp-1008"
+      class="x-tip-invalid"
+      style="
+        position: absolute;
+        z-index: 11000;
+        visibility: hidden;
+        display: none;
+      "
+    >
+      <div class="x-tip-invalid-tl">
+        <div class="x-tip-invalid-tr">
+          <div class="x-tip-invalid-tc">
+            <div
+              class="x-tip-invalid-header x-unselectable"
+              id="syno-nsc-ext-gen4"
+            >
+              <span class="x-tip-invalid-header-text"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="x-tip-invalid-bwrap" id="syno-nsc-ext-gen5">
+        <div class="x-tip-invalid-ml">
+          <div class="x-tip-invalid-mr">
+            <div class="x-tip-invalid-mc" id="syno-nsc-ext-gen8">
+              <div
+                class="x-tip-invalid-body"
+                id="syno-nsc-ext-gen6"
+                style="height: auto"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="x-tip-invalid-bl x-panel-nofooter" id="syno-nsc-ext-gen7">
+          <div class="x-tip-invalid-br">
+            <div class="x-tip-invalid-bc"></div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="x-tip-anchor x-tip-anchor-top"
+        id="syno-nsc-ext-gen9"
+        style="z-index: 11001"
+      ></div>
+    </div>
+  </body>
+</html>
