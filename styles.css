@@ -155,3 +155,22 @@ button:hover {
 input[type="checkbox"] {
   accent-color: #e3fafc;
 }
+
+@media (max-width: 62.5rem) {
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 48rem) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  .owl-logo {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  main {
+    grid-template-columns: 100%;
+  }
+}
