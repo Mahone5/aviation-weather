@@ -1,3 +1,10 @@
+:root {
+  --base-teal: #0b7285;
+  --shade-teal: #1893a9;
+  --very-light-teal: #e3fafc;
+  --accent-red: #d8200d;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +12,10 @@
 }
 
 body {
-  background-color: #e3fafc;
+  background-color: var(--very-light-teal);
   font-family: sans-serif;
   width: 100%;
+  color: #222;
 }
 
 header {
@@ -29,7 +37,7 @@ header {
 }
 
 h1 {
-  color: #0b7285;
+  color: var(--accent-red);
   font-size: 3rem;
 }
 
@@ -43,9 +51,9 @@ nav input {
   margin: 0;
   box-sizing: border-box;
   font: inherit;
-  background-color: #0b7285;
+  background-color: var(--base-teal);
   color: #fff;
-  border: 1px solid #0b7285;
+  border: 1px solid var(--base-teal);
   padding: 0.5rem 0.5rem;
   border-radius: 4px;
   cursor: pointer;
@@ -53,15 +61,15 @@ nav input {
 }
 
 nav input:hover {
-  background-color: #1893a9;
-  border-color: #1893a9;
+  background-color: var(--shade-teal);
+  border-color: var(--shade-teal);
 }
 
 main {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 1.5rem;
   margin: 0 3rem;
 }
@@ -149,14 +157,14 @@ select {
 } */
 
 select {
-  background-color: #e3fafc;
+  background-color: var(--very-light-teal);
 }
 
 button {
   font: inherit;
-  background-color: #0b7285;
+  background-color: var(--base-teal);
   color: #fff;
-  border: 1px solid #0b7285;
+  border: 1px solid var(--base-teal);
   padding: 0.5rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
@@ -170,8 +178,8 @@ button {
 }
 
 button:hover {
-  background-color: #1893a9;
-  border-color: #1893a9;
+  background-color: var(--shade-teal);
+  border-color: var(--shade-teal);
 }
 
 .form-control-inline {
@@ -184,14 +192,39 @@ button:hover {
 }
 
 input[type="checkbox"] {
-  accent-color: #e3fafc;
+  accent-color: var(--very-light-teal);
 }
 
-@media (max-width: 62.5rem) {
+.card-3 h2 {
+  text-align: center;
+}
+
+.card-3 ul {
+  list-style: none;
+  padding: 2rem auto;
+  line-height: 1.5rem;
+}
+
+.card-3 li {
+  text-align: center;
+}
+
+.card-3 a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.card-3 a:hover {
+  color: var(--accent-red);
+  font-size: 1.01rem;
+}
+
+/* @media (max-width: 62.5rem) {
   main {
     grid-template-columns: 1fr 1fr;
   }
-}
+} */
 
 @media (max-width: 48rem) {
   h1 {
