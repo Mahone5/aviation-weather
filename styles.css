@@ -34,6 +34,7 @@ header {
   height: 3rem;
   width: 3rem;
   margin-right: 1rem;
+  fill: white;
 }
 
 h1 {
@@ -192,7 +193,7 @@ button:hover {
 }
 
 input[type="checkbox"] {
-  accent-color: var(--very-light-teal);
+  accent-color: var(--accent-red);
 }
 
 .card-3 h2 {
